@@ -1,0 +1,61 @@
+---
+title: "HW1_nh2706"
+output: github_document
+---
+
+```{r, message = FALSE, echo=FALSE}
+library(tidyverse)
+```
+
+# Section 1
+
+## Loading Data
+
+Downloading the a package containing the `penguins` dataset
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+## Data Summary
+Presenting the data to you:
+
+`r skimr::skim(penguins)`
+
+The summary above shows  that the size of the dataset is `r nrow(penguins)` rows long and `r ncol(penguins)` columns wide. 
+
+The mean flipper length within the dataset is `r round(mean(na.omit(penguins$flipper_length_mm)),2)` millimeters.
+
+## Scatterplot with bill_length and flipper_length
+
+Creating a scatterplot of `bill_length_mm` and `flipper_length_mm`, using the different species to colorcode the individual points.
+
+```{r, warning=FALSE}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color=species)) + geom_point()
+```
+
+Subsequently, exporting the scatterplot to the project directory as a **PDF**
+
+```{r, warning==FALSE}
+ggsave("scatterplot.pdf")
+```
+
+
+# Section 2
+
+## Data Frame Creation
+
+Using `tible`, we are now creating a datafram with the required specs.
+
+```{r}
+hw_frame=
+  tibble(
+    random=rnorm(n=10),
+    logical=random>0,
+  )
+```
+
+
+
+
+
