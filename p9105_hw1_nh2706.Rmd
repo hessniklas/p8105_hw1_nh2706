@@ -18,15 +18,26 @@ data("penguins", package = "palmerpenguins")
 ```
 
 ## Data Summary
-Presenting the data to you:
+Presenting the data to you (*shows the chunk but not the output*):
 
-```{r}
+```{r, eval=FALSE}
 skimr::skim(penguins)
 ```
 
-The summary above shows  that the size of the dataset is `r nrow(penguins)` rows long and `r ncol(penguins)` columns wide. 
+The summary above shows the following key information:
 
-The mean flipper length within the dataset is `r round(mean(na.omit(penguins$flipper_length_mm)),2)` millimeters.
+*   The dataset is `r nrow(penguins)` rows long and `r ncol(penguins)` columns wide
+*   8 total variables:
+    *   5 numeric:
+        *   bill_length_mm: mean = `r round(mean(na.omit(penguins$bill_length_mm)),2)` 
+        *   bill_depth_mm: mean = `r round(mean(na.omit(penguins$bill_depth_mm)),2)`
+        *   **flipper_length_mm: mean = `r round(mean(na.omit(penguins$flipper_length_mm)),2)`**
+        *   body_mass_g: mean = `r round(mean(na.omit(penguins$body_mass_g)),2)`
+        *   year: mean = `r round(mean(penguins$year),2)`
+    * 3 factor:
+        *   species (3 factors)
+        *   island (3 factors)
+        *   sex (3 factors)
 
 ## Scatterplot with bill_length and flipper_length
 
@@ -38,7 +49,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color=species)) 
 
 Subsequently, exporting the scatterplot to the project directory as a **PDF**
 
-```{r, warning==FALSE}
+```{r, eval=FALSE}
 ggsave("scatterplot.pdf")
 ```
 
@@ -77,7 +88,7 @@ When trying to take the mean of each variable, the result is the following (*rou
 
 Given that the mean of the character and factor variables could not be calculating, the next step is to convert those variables to a numeric variable.
 
-To do so, I am creating three  new variables `Num_logical_vec`, `Num_character_vec`, `Num_factor_vec`.
+To do so, I am creating three  new variables `Num_logical_vec`, `Num_character_vec`, `Num_factor_vec` (*shows the chunk but not the output*):
 
 ```{r, eval=FALSE}
 Num_logical_vec=as.numeric(hw_frame$logical_vec)
