@@ -20,7 +20,9 @@ data("penguins", package = "palmerpenguins")
 ## Data Summary
 Presenting the data to you:
 
-`r skimr::skim(penguins)`
+```{r}
+skimr::skim(penguins)
+```
 
 The summary above shows  that the size of the dataset is `r nrow(penguins)` rows long and `r ncol(penguins)` columns wide. 
 
@@ -45,15 +47,47 @@ ggsave("scatterplot.pdf")
 
 ## Data Frame Creation
 
-Using `tible`, we are now creating a datafram with the required specs.
+Using `tible`, we are now creating a datafram with the following specs:
+
+*   **random_vec** = random sample of size 10 from a standard Normal distribution
+*   **logical_vec** = logical vector indicating whether elements of the sample are greater than 0
+*   **character_vec** = character vector of length 10
+*   **factor_vec** = factor vector of length 10, with 3 different factor “levels”
 
 ```{r}
 hw_frame=
   tibble(
-    random=rnorm(n=10),
-    logical=random>0,
+    random_vec=rnorm(n=10),
+    logical_vec=random_vec>0,
+    character_vec= c(sample(LETTERS, 10, replace = TRUE)),
+    factor_vec=factor(cut(random_vec,3,labels=c('Low','Medium','High')))
   )
 ```
+
+## Calculating the mean of each variable
+
+When trying to take the mean of each variable, the result is the following (*rounded to the nearest tenth*):
+
+*   **random_vec** = `r round(mean(hw_frame$random_vec),2)`. This works, because it is a numeric variable.
+*   **logical_vec** = `r mean(hw_frame$logical_vec)`. This works, because it is a TRUE/FALSE variable, which can be converted to numeric values (TRUE = 1 and FALSE = 0).
+*   **character_vec** = No result because the variable is not numerical.
+*   **factor_vec** = No result because the variable is not numerical.
+
+## Converting character and factor variables to numeric variables
+
+Given that the mean of the character and factor variables could not be calculating, the next step is to convert those variables to a numeric variable.
+
+To do so, I am creating three  new variables `Num_logical_vec`, `Num_character_vec`, `Num_factor_vec`.
+
+```{r, eval=FALSE}
+Num_logical_vec=as.numeric(hw_frame$logical_vec)
+Num_character_vec=as.numeric(hw_frame$character_vec)
+Num_factor_vec=as.numeric(hw_frame$factor_vec)
+```
+
+The result of this is that the logical and factor variable can be converted to a numeric variable based on  logic (TRUE/FALSE & 3 Categories). However, the character variable is filled with NA, since there is no logic to convert to numeric values.
+
+# END OF HW1
 
 
 
