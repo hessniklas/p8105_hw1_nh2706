@@ -1,5 +1,7 @@
 ---
 title: "HW1_nh2706"
+author: "Niklas Hess"
+date: 2022-09-24
 output: github_document
 ---
 
