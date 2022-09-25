@@ -5,7 +5,7 @@ date: 2022-09-24
 output: github_document
 ---
 
-```{r, message = FALSE, echo=FALSE}
+```{r, message = FALSE, echo = FALSE}
 library(tidyverse)
 ```
 
@@ -13,59 +13,59 @@ library(tidyverse)
 
 ## Loading Data
 
-Downloading the a package containing the `penguins` dataset
+Loading the `penguins` dataset
 
 ```{r}
 data("penguins", package = "palmerpenguins")
 ```
 
 ## Data Summary
+
 Presenting the data to you (*shows the chunk but not the output*):
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 skimr::skim(penguins)
 ```
 
 The summary above shows the following key information:
 
-*   The dataset is `r nrow(penguins)` rows long and `r ncol(penguins)` columns wide
-*   8 total variables:
-    *   5 numeric:
-        *   bill_length_mm: mean = `r round(mean(na.omit(penguins$bill_length_mm)),2)` 
-        *   bill_depth_mm: mean = `r round(mean(na.omit(penguins$bill_depth_mm)),2)`
-        *   **flipper_length_mm: mean = `r round(mean(na.omit(penguins$flipper_length_mm)),2)`**
-        *   body_mass_g: mean = `r round(mean(na.omit(penguins$body_mass_g)),2)`
-        *   year: mean = `r round(mean(penguins$year),2)`
-    * 3 factor:
-        *   species (3 factors)
-        *   island (3 factors)
-        *   sex (3 factors)
+-   The dataset is `r nrow(penguins)` rows long and `r ncol(penguins)` columns wide
+-   8 total variables:
+    -   5 numeric:
+        -   bill_length_mm: mean = `r round(mean(na.omit(penguins$bill_length_mm)),2)`
+        -   bill_depth_mm: mean = `r round(mean(na.omit(penguins$bill_depth_mm)),2)`
+        -   **flipper_length_mm: mean = `r round(mean(na.omit(penguins$flipper_length_mm)),2)`**
+        -   body_mass_g: mean = `r round(mean(na.omit(penguins$body_mass_g)),2)`
+        -   year: mean = `r round(mean(penguins$year),2)`
+    -   3 factor:
+        -   species (3 factors)
+        -   island (3 factors)
+        -   sex (3 factors)
 
 ## Scatterplot with bill_length and flipper_length
 
 Creating a scatterplot of `bill_length_mm` and `flipper_length_mm`, using the different species to colorcode the individual points.
 
-```{r, warning=FALSE}
+```{r, warning = FALSE}
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 ```
 
 Subsequently, exporting the scatterplot to the project directory as a **PDF**
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 ggsave("scatterplot.pdf")
 ```
-
 
 # Section 2
 
 ## Data Frame Creation
 
-Using `tible`, we are now creating a datafram with the following specs:
+Using `tible` function, we are now creating a dataframe with the following specs:
 
-*   **random_vec** = random sample of size 10 from a standard Normal distribution
-*   **logical_vec** = logical vector indicating whether elements of the sample are greater than 0
-*   **character_vec** = character vector of length 10
-*   **factor_vec** = factor vector of length 10, with 3 different factor “levels”
+-   **random_vec** = random sample of size 10 from a standard Normal distribution
+-   **logical_vec** = logical vector indicating whether elements of the sample are greater than 0
+-   **character_vec** = character vector of length 10
+-   **factor_vec** = factor vector of length 10, with 3 different factor "levels"
 
 ```{r}
 hw_frame =
@@ -81,10 +81,10 @@ hw_frame =
 
 When trying to take the mean of each variable, the result is the following (*rounded to the nearest tenth*). :
 
-*   **random_vec** = `r round(mean(hw_frame$random_vec),2)`. This works, because it is a numeric variable.
-*   **logical_vec** = `r mean(hw_frame$logical_vec)`. This works, because it is a TRUE/FALSE variable, which can be converted to numeric values (TRUE = 1 and FALSE = 0).
-*   **character_vec** = No result because the variable is not numerical.
-*   **factor_vec** = No result because the variable is not numerical.
+-   **random_vec** = `r round(mean(hw_frame$random_vec),2)`. This works, because it is a numeric variable.
+-   **logical_vec** = `r mean(hw_frame$logical_vec)`. This works, because it is a TRUE/FALSE variable, which can be coerced to numerical values (TRUE = 1 and FALSE = 0).
+-   **character_vec** = No result because the variable is neither numerical nor logical.
+-   **factor_vec** = No result because the variable is neither numerical nor logical.
 
 ## Converting character and factor variables to numeric variables
 
@@ -92,13 +92,12 @@ Given that the mean of the character and factor variables could not be calculati
 
 To do so, I am creating three new variables `Num_logical_vec`, `Num_character_vec`, `Num_factor_vec` (Note: **(1)** *shows the chunk but not the output* **(2)** *Could have used `pull` function, but instead opted for extraction operator `$`*):
 
-```{r, eval=FALSE}
+```{r, eval = FALSE}
 Num_logical_vec = as.numeric(hw_frame$logical_vec)
 Num_character_vec = as.numeric(hw_frame$character_vec)
 Num_factor_vec = as.numeric(hw_frame$factor_vec)
 ```
 
-
-The result of this is that the logical and factor variable can be converted to a numeric variable based on  logic (TRUE/FALSE & 3 Categories). However, the character variable is filled with NA, since there is no logic to convert to numeric values.
+The result of this is that the logical and factor variable can be converted to a numeric variable based on logic (TRUE/FALSE & 3 Categories). However, the character variable is filled with NA, since there is no logic to convert to numeric values.
 
 # END OF HW1
